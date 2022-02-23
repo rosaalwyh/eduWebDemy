@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "userId": 4,
+        "phoneNumber": "085712345443",
+        "address": "Bekasi",
+        "Education": "S3"
+    },
+    {
+        "id": 2,
+        "userId": 5,
+        "phoneNumber": "085712345453",
+        "address": "Bandung",
+        "Education": "S3"
+    },
+    {
+        "id": 1,
+        "userId": 6,
+        "phoneNumber": "085712345400",
+        "address": "Jakarta",
+        "Education": "S3"
+    }
+]

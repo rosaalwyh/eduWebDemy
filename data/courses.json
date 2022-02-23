@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Build REST API with express",
+        "description" : "Tahukah kamu bahwa JavaScript adalah bahasa pemrograman yang digunakan dalam pengembangan website agar lebih dinamis dan interaktif. Kalau sebelumnya kamu hanya mengenal HTML dan CSS, nah sekarang kamu jadi tahu bahwa JavaScript dapat meningkatkan fungsionalitas pada halaman web. Bahkan dengan JavaScript ini kamu bisa membuat aplikasi, tools, atau bahkan game pada web.",
+        "duration" : 3600,
+        "categoryId" : 1,
+        "userId": 2
+    },
+    {
+        "id": 2,
+        "name": "MVC with Javascipt and Postgres",
+        "description" : "Tahukah kamu bahwa JavaScript adalah bahasa pemrograman yang digunakan dalam pengembangan website agar lebih dinamis dan interaktif. Kalau sebelumnya kamu hanya mengenal HTML dan CSS, nah sekarang kamu jadi tahu bahwa JavaScript dapat meningkatkan fungsionalitas pada halaman web. Bahkan dengan JavaScript ini kamu bisa membuat aplikasi, tools, atau bahkan game pada web.",
+        "duration" : 3600,
+        "categoryId" : 1,
+        "userId": 2
+    },
+    {
+        "id": 3,
+        "name": "Multi Level Login using PHP",
+        "description" : "login multi user level adalah beberapa user dengan hak akses yang berbeda bisa melakukan login pada  form login, dan jika berhasil melakukan login, maka user yang login tersebut akan diarahkan ke halaman dashboardnya masing-masing",
+        "duration" : 1800,
+        "categoryId" : 2,
+        "userId": 2
+    },
+    {
+        "id": 4,
+        "name": "Web Development Using Django",
+        "description" : "Django adalah sebuah framework full-stack untuk membuat aplikasi web dengan bahasa pemrograman Python. Framework akan membantu kita membuat web lebih cepat, dibandingkan menulis kode dari nol.",
+        "duration" : 7200,
+        "categoryId" : 3,
+        "userId": 2
+    },
+    {
+        "id": 5,
+        "name": "HTML and CSS",
+        "description" : "Hyper Text Markup Language (HTML) adalah sebuah bahasa markah yang digunakan untuk membuat sebuah halaman web, menampilkan berbagai informasi di dalam sebuah penjelajah web Internet dan pemformatan hiperteks sederhana yang ditulis dalam berkas format ASCII agar dapat menghasilkan tampilan wujud yang terintegerasi.",
+        "duration" : 1800,
+        "categoryId" : 4,
+        "userId": 2
+    }
+]
