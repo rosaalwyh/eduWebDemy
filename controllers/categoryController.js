@@ -6,6 +6,9 @@ class CategoryController {
         .then(dataCategory => {
             res.render('categories/showCategory', {dataCategory})
         })
+        .catch(err => {
+            res.send(err)
+        })
     }
     static addCategory(req, res) {
         const msg = req.query.error
@@ -55,7 +58,6 @@ class CategoryController {
     }
     static deleteCategory(req, res) {
         const id = req.params.id
-
         Category.destroy({
             where: {
                 id

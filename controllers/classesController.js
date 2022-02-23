@@ -1,6 +1,6 @@
 class ClassesController {
     static getClass(req, res) {
-
+        
     }
 
     static addClass(req, res) {
