@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const coursesRoutes = require('./classesRoutes');
+const coursesRoutes = require('./coursesRoutes');
 const classesRoutes = require('./classesRoutes');
 const categoryRoutes = require('./categoryRoutes');
 const HomeContoller = require('../controllers/homeController');
