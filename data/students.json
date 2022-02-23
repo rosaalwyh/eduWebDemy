@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "phoneNumber": "081290781126",
+        "address": "Tangerang Selatan",
+        "education": "S1"
+    },
+    {
+        "id": 2,
+        "userId": 3,
+        "phoneNumber": "081290781341",
+        "address": "Palembang",
+        "education": "S2"
+    },
+    {
+        "id": 3,
+        "userId": 7,
+        "phoneNumber": "081290782235",
+        "address": "Depok",
+        "education": "SMA"
+    },
+    {
+        "id": 4,
+        "userId": 8,
+        "phoneNumber": "081290782235",
+        "address": "Depok",
+        "education": "SMA"
+    }
+]

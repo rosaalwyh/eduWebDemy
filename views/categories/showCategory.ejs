@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Categories</title>
+</head>
+<a href="/category/add">Add</a>
+<body>
+    <table border="1">
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+        <% dataCategory.forEach((el, i)=> { %>
+            <tr>
+                <td><%= i + 1 %></td>
+                <td><%= el.name %></td>
+                <td>
+                    <a href="/category/edit/<%= el.id %>">Edit</a>
+                    <a href="/category/delete/<%= el.id %>">Delete</a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+
+</html>
