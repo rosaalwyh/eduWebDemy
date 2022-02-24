@@ -1,27 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Categories</title>
-</head>
-<body>
-    <% if (msg) { %>
-     <p style="color: red;"><%= msg %></p>
-    <% } %>
-    <form action="/detailUser/edit/<%= detailEdit.id %>" method="post">
-        <label for="fullName">Enter FullName:</label><br>
-        <input type="text" id="fullName" name="fullName" value="<%= detailEdit.fullName %>"><br>
-        <label for="dateOfBirth">Enter Date of Birth:</label><br>
-        <input type="date" id="dateOfBirth" name="dateOfBirth", value="<%= detailEdit.date %>"><br>
-        <label for="profilePicture">Enter Profile Picture:</label><br>
-        <input type="text" id="profilePicture" name="profilePicture" value="<%= detailEdit.profilePicture %>"><br>
-        <label for="address">Enter Address:</label><br>
-        <input type="text" id="address" name="address" value="<%= detailEdit.address %>"><br>
-        <label for="phoneNumber">Enter Phone Number:</label><br>
-        <input type="text" id="phoneNumber" name="phoneNumber" value="<%= detailEdit.phoneNumber %>"><br>
-        <input type="submit" value="Submit">
-    </form> 
-</body>
-</html>
+<%- include('../layouts/header') %>
+<div class="p-3">
+    <div class="container">
+        <% if (msg) { %>
+        <p style="color: red;"><%= msg %></p>
+        <% } %>
+        <form action="/detailUser/edit/<%= detailEdit.id %>" method="post" class="mt-4">
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="col-sm-2 col-form-label" for="fullName">Enter FullName:</label>
+                    <input class="form-control" type="text" id="fullName" name="fullName" value="<%= detailEdit.fullName %>">
+                </div>
+                <div class="col-lg-6">
+                    <label class="col-sm-2 col-form-label" for="dateOfBirth">Enter Date of Birth:</label>
+                    <input class="form-control" type="date" id="dateOfBirth" name="dateOfBirth", value="<%= detailEdit.date %>">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="col-sm-2 col-form-label" for="profilePicture">Enter Profile Picture:</label>
+                    <input class="form-control" type="text" id="profilePicture" name="profilePicture" value="<%= detailEdit.profilePicture %>">
+                </div>
+                <div class="col-lg-6">
+                    <label class="col-sm-2 col-form-label" for="address">Enter Address:</label>
+                    <input class="form-control" type="text" id="address" name="address" value="<%= detailEdit.address %>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="col-sm-2 col-form-label" for="phoneNumber">Enter Phone Number:</label>
+                    <input class="form-control" type="text" id="phoneNumber" name="phoneNumber" value="<%= detailEdit.phoneNumber %>">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include('../layouts/footer') %>

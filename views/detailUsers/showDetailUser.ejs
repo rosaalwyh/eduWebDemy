@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show All User</title>
-</head>
-<body>
-    <a href="/detailUser/add">Add</a>
-    <table border="1">
+<%- include('../layouts/header') %>
+    <a href="/detailUser/add" class="btn btn-info">Add</a>
+    <table class="table"> 
         <tr>
           <th>No</th>
           <th>Full Name</th>
@@ -18,21 +10,33 @@
           <th>Phone Number</th>
           <th>Action</th>
         </tr>
-        <% dataDetail.forEach((el, i) => { %>
-        <tr>
-          <td><%= i + 1 %></td>
-          <td><%= el.fullName %></td>
-          <td><%= el.age %></td>
-          <td><img src="<%= el.profilePicture %>" alt="dummy image"></td>
-          <td><%= el.address %></td>
-          <td><%= el.phoneNumber %></td>
-          <td>
-              <a href="/detailUser/edit/<%= el.id %>">Edit</a>
-              <a href="/detailUser/delete/<%= el.id %>">Delete</a>
-              <a href="/"></a>
-          </td>
-        </tr>
-        <% }) %>
+        <% if (id) { %>
+            <tr>
+              <td>1</td>
+              <td><%= dataDetail.fullName %></td>
+              <td><%= dataDetail.age %></td>
+              <td><img src="<%= dataDetail.profilePicture %>" alt="dummy image"></td>
+              <td><%= dataDetail.address %></td>
+              <td><%= dataDetail.phoneNumber %></td>
+              <td>
+                  <a href="/detailUser/edit/<%= dataDetail.id %>"  class="btn btn-warning" >Edit</a>
+                  <a href="/detailUser/delete/<%= dataDetail.id %>" class="btn btn-danger">Delete</a>
+              </td> 
+        <% } else {%>
+          <% dataDetail.forEach((el, i) => { %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><%= el.fullName %></td>
+              <td><%= el.age %></td>
+              <td><img src="<%= el.profilePicture %>" alt="dummy image"></td>
+              <td><%= el.address %></td>
+              <td><%= el.phoneNumber %></td>
+              <td>
+                  <a href="/detailUser/edit/<%= el.id %>"  class="btn btn-warning" >Edit</a>
+                  <a href="/detailUser/delete/<%= el.id %>" class="btn btn-danger">Delete</a>
+              </td>
+            </tr>
+            <% }) %>
+          <% } %>
       </table>      
-</body>
-</html>
+<%- include('../layouts/footer') %>

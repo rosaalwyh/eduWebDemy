@@ -1,33 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Categories</title>
-</head>
-<body>
+<%- include('../layouts/header') %>
     <% if (msg) { %>
      <p style="color: red;"><%= msg %></p>
     <% } %>
-    <form action="/user/add" method="post">
+<form action="/user/add" method="post">
+    <div class="container">
+    <div class="form-group">
         <label for="username">Enter Username:</label><br>
-        <input type="text" id="username" name="username"><br>
+        <input class="form-control" type="text" id="username" name="username"><br>
         <label for="password">Enter Password:</label><br>
-        <input type="password" id="password" name="password"><br>
+        <input class="form-control"type="password" id="password" name="password"><br>
         <label for="email">Enter email:</label><br>
-        <input type="email" id="email" name="email"><br>
-        <label for="role">Choose the Role:</label>
-        <br><select name="role" id="role">
+        <input class="form-control" type="email" id="email" name="email"><br>
+        <label  for="role">Choose the Role:</label>
+        <br><select class="form-select" name="role" id="role">
           <option value="Admin">Admin</option>
           <option value="Teacher">Teacher</option>
           <option value="Student">Student</option>
         </select><br>
         <label for="profilePicture">Enter Profile Picture:</label><br>
-        <input type="text" id="profilePicture" name="profilePicture"><br>
+        <input class="form-control" type="text" id="profilePicture" name="profilePicture"><br>
         <label for="dateOfBirth">Enter Date of Birth:</label><br>
-        <input type="date" id="dateOfBirth" name="dateOfBirth"><br>
-        <input type="submit" value="Submit">
-    </form> 
-</body>
-</html>
+        <input class="form-control" type="date" id="dateOfBirth" name="dateOfBirth"><br>
+        <br>
+        <button type="submit" value="Submit" class="btn btn-warning">Edit</button>
+    </div>
+    </div>
+</form> 
+<%- include('../layouts/footer') %>
