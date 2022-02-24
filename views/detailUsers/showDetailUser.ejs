@@ -1,5 +1,7 @@
 <%- include('../layouts/header') %>
-    <a href="/detailUser/add" class="btn btn-info">Add</a>
+<div class="container">
+  <div class="p-3">
+    <a href="/detailUser/add" class="btn btn-info">Add User Detail</a>
     <table class="table"> 
         <tr>
           <th>No</th>
@@ -12,26 +14,26 @@
         </tr>
         <% if (id) { %>
             <tr>
-              <td>1</td>
-              <td><%= dataDetail.fullName %></td>
-              <td><%= dataDetail.age %></td>
-              <td><img src="<%= dataDetail.profilePicture %>" alt="dummy image"></td>
-              <td><%= dataDetail.address %></td>
-              <td><%= dataDetail.phoneNumber %></td>
-              <td>
+              <td scope="col">1</td>
+              <td scope="col"><%= dataDetail.fullName %></td>
+              <td scope="col"><%= dataDetail.age %></td>
+              <td scope="col"><img src="<%= dataDetail.profilePicture %>" alt="dummy image"></td>
+              <td scope="col"><%= dataDetail.address %></td>
+              <td scope="col"><%= dataDetail.phoneNumber %></td>
+              <td scope="col">
                   <a href="/detailUser/edit/<%= dataDetail.id %>"  class="btn btn-warning" >Edit</a>
                   <a href="/detailUser/delete/<%= dataDetail.id %>" class="btn btn-danger">Delete</a>
               </td> 
         <% } else {%>
           <% dataDetail.forEach((el, i) => { %>
             <tr>
-              <td><%= i + 1 %></td>
-              <td><%= el.fullName %></td>
-              <td><%= el.age %></td>
-              <td><img src="<%= el.profilePicture %>" alt="dummy image"></td>
-              <td><%= el.address %></td>
-              <td><%= el.phoneNumber %></td>
-              <td>
+              <td scope="col"><%= i + 1 %></td>
+              <td scope="col"><%= el.fullName %></td>
+              <td scope="col"><%= el.age %></td>
+              <td scope="col"><img src="<%= el.profilePicture %>" alt="dummy image"></td>
+              <td scope="col"><%= el.address %></td>
+              <td scope="col"><%= el.phoneNumber %></td>
+              <td scope="col">
                   <a href="/detailUser/edit/<%= el.id %>"  class="btn btn-warning" >Edit</a>
                   <a href="/detailUser/delete/<%= el.id %>" class="btn btn-danger">Delete</a>
               </td>
@@ -39,4 +41,6 @@
             <% }) %>
           <% } %>
       </table>      
+  </div>
+</div>
 <%- include('../layouts/footer') %>
