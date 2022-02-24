@@ -1,7 +1,8 @@
 // npx sequelize-cli model:generate --name Category --attributes name:string
-// npx sequelize-cli model:generate --name User --attributes username:string
+// npx sequelize-cli model:generate --name User --attributes username:string,password:string,email:string,role:string,role:string,profilePicture:string,dateOfBirth:date
+// npx sequelize-cli model:generate --name Courses --attributes name:string,description:text,duration:integer,CategoryId:integer,UserId:integer
 // npx sequelize-cli model:generate --name Category --attributes name:string
-// npx sequelize-cli model:generate --name Category --attributes name:string
+// npx sequelize-cli seed:generate --name users-seeder
 const express = require('express')
 const app = express()
 const port = 3000
