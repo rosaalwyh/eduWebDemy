@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Categories</title>
-</head>
-<body>
+<%- include('../layouts/header') %>
     <% if (msg) { %>
      <p style="color: red;"><%= msg %></p>
     <% } %>
@@ -21,7 +13,7 @@
         <input type="text" id="address" name="address"><br>
         <label for="phoneNumber">Enter Phone Number:</label><br>
         <input type="text" id="phoneNumber" name="phoneNumber"><br>
-        <input type="submit" value="Submit">
+        <br>
+        <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
     </form> 
-</body>
-</html>
+<%- include('../layouts/footer') %>

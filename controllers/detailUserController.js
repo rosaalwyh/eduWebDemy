@@ -1,14 +1,21 @@
-const {DetailUser} = require('../models/index')
+const {DetailUser, User} = require('../models/index')
 
 class DetailUserController {
     static getdetailUser(req, res) {
         const id = req.params.id
         if (id){
-            
+            DetailUser.findByPk(id)
+            .then(dataDetail => {
+                console.log(id);
+                res.render('detailUsers/showDetailUser', {dataDetail, id})
+            })
+            .catch(err => {
+                res.send(err)
+            })
         } else {
             DetailUser.findAll()
             .then(dataDetail => {
-                res.render('detailUsers/showDetailUser', {dataDetail})
+                res.render('detailUsers/showDetailUser', {dataDetail, id})
             })
             .catch(err => {
                 res.send(err)

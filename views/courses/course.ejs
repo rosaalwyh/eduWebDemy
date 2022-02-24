@@ -7,6 +7,13 @@
                 </div>
             <% } %>
             <a href="/courses/add" class="btn btn-outline-info">Add Course</a>
+            <div class="float-end">
+                <form action="/courses" method="get">
+                    Sort By :
+                    <button name="sorted" value="category" class="btn btn-outline-info">Category</button>
+                    <button name="sorted" value="duration" class="btn btn-outline-info">Duration</button>
+                </form>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
@@ -15,6 +22,7 @@
                         <th scope="col">Description</th>
                         <th scope="col">Duration</th>
                         <th scope="col">Category</th>
+                        <th scope="col">Teacher Name</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -27,6 +35,10 @@
                             <td><%= course.description %></td>
                             <td><%= course.duration %></td>
                             <td><%= course.Category.name %></td>
+                            <td> <% course.Users.forEach(el => { %>
+                                <%= el.username %>
+                            <% }) %>
+                            </td>
                             <td>
                                 <a href="/courses/delete/<%=course.id%>" class="btn btn-outline-danger">Delete</a>
                                 <a href="/courses/edit/<%=course.id%>" class="btn btn-outline-success">Edit</a>

@@ -36,11 +36,13 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <label for="inputState" class="form-label">User</label>
+                    <label for="inputState" class="form-label">Teacher</label>
                     <select id="inputState" class="form-select" name="UserId">
                       <option value="" selected>Choose...</option>
                       <% users.forEach(user => { %>
-                        <option value="<%=user.id%>"><%=user.username%></option>
+                        <% if (user.role === 'Teacher') { %>
+                          <option value="<%=user.id%>"><%=user.username%></option>
+                        <% } %>
                       <% }) %>
                     </select>
                   </div>
