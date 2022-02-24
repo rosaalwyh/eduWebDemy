@@ -2,6 +2,7 @@ const coursesRouter = require('express').Router();
 const { isAdminTeacher } = require('../middleware');
 const CoursesController =  require('../controllers/coursesController');
 
+
 //backend
 coursesRouter.get('/courses', isAdminTeacher,  CoursesController.getCourses)
 coursesRouter.get('/courses/add',isAdminTeacher, CoursesController.addCourses)

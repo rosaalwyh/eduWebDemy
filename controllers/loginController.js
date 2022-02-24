@@ -46,7 +46,7 @@ class LoginController {
                     return res.redirect(`/login?errMsg=${errMsg}`)
                 } else {
                     //case berhasil
-                    req.session.user =  {id: user.id, role:user.role} //set session di controller login
+                    req.session.user =  {id: user.id, role:user.role, email:user.email} //set session di controller login
                     const isValidAuth = compare(password, user.password);
                     if(isValidAuth){
                         if(req.session.user.role === "Student"){

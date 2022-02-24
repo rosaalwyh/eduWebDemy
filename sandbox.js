@@ -1,49 +1,46 @@
-const {Course, Category, User, UserCourse} = require('./models');
-const sequelize = require('sequelize')
+const express = require('express')
+const router = require('./routes');
+const session = require('express-session')
+const app = express()
+const port = 3003
+const path = require('path')
 
-console.log(sequelize.UserCourse);
-class Test {
-    // static editCourses(req, res) {
-    //     let {id} = req.params
-    //     let { errMsg } = req.query
-    //     let category
-    //     let users
-    //     Category.findAll()
-    //     .then((categories) => {
-    //         category = categories
-    //         return User.findAll()
-    //     })
-    //     .then((user) => {
-    //         users = user
-    //         return Course.findByPk(id)
-    //     })
-    //     .then((course) => {
-    //         res.render('./courses/editCourse', {course, users ,category, errMsg})
-    //     })
-    //     .catch((err) => {
-    //         res.send(err)
-    //     })
-    // }
-    static updateCourses(req, res) {
-        let {id} = req.params
-        let { name, description, duration, CategoryId, UserId } = req.body
-        let editedCourse = { name, description, duration, CategoryId, UserId }
-        let data;
-        Course.update((editedCourse), {where: {id}})
-        .then((course) => {
-            data = {
-                CourseId : course.id,
-                UserId
-            }
-            return UserCourse.update((data), {where: {id}})
-        })
-        .then(() => {
-            res.redirect('/courses')
-        })
-        .catch((err) => {
-            console.log(err);
-            let errMsg = err.errors.map((errEl) => errEl.message)
-            res.redirect(`/courses/edit/${id}?errMsg=${errMsg}`)
-        })
+const multer = require('multer');
+const res = require('express/lib/response');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'Images')
+    },
+    filename: (req, file, cb) => {
+        console.log(file);
+        cb(null, Date.now() + path.extname(file.originalname))
     }
-}
+})
+
+const upload = multer ({storage: storage})
+app.get('/upload', (req,res) => {
+    res.render('upload')
+})
+
+app.post('/upload', upload.single('image'), (req,res) => {
+    res.send('uploaded')
+})
+
+// app.set('view engine', 'ejs');
+// app.use(express.urlencoded({ extended: true }));
+// app.use(session({
+//   secret: 'gabolehtau',//harus ada
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: { 
+//     secure: false,
+//     sameSite: true //utk security csrf attack
+//   }
+// }))
+
+
+// app.use(router);
+
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port} http://localhost:3000/`)
+// })

@@ -24,6 +24,7 @@
                         <th scope="col">Category</th>
                         <th scope="col">Teacher</th>
                         <th scope="col">Action</th>
+                        <th scope="col">Join Now</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,8 +43,11 @@
                                 <a href="/courses/delete/<%=course.id%>" class="btn btn-outline-danger">Delete</a>
                                 <a href="/courses/edit/<%=course.id%>" class="btn btn-outline-success">Edit</a>
                             </td>
+                            <td> 
+                                <a href="/courses?userId=<%=id%>&courseName=<%=course.name%>&duration=<%=course.duration%>" class="btn btn-primary">Join Class</a>
+                            </td>
                         </tr>
-                    <% }) %>
+                        <% }) %>
                 </tbody>
             </table>
         </div>

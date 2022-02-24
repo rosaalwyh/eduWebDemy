@@ -2,6 +2,7 @@ const express = require('express')
 const router = require('./routes');
 const session = require('express-session')
 const app = express()
+const multer = require('multer');
 const port = 3000
 
 app.set('view engine', 'ejs');
