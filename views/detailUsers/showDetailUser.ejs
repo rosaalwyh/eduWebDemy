@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show All User</title>
+</head>
+<body>
+    <a href="/detailUser/add">Add</a>
+    <table border="1">
+        <tr>
+          <th>No</th>
+          <th>Full Name</th>
+          <th>Age</th>
+          <th>Profile Picture</th>
+          <th>Address</th>
+          <th>Phone Number</th>
+          <th>Action</th>
+        </tr>
+        <% dataDetail.forEach((el, i) => { %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= el.fullName %></td>
+          <td><%= el.age %></td>
+          <td><img src="<%= el.profilePicture %>" alt="dummy image"></td>
+          <td><%= el.address %></td>
+          <td><%= el.phoneNumber %></td>
+          <td>
+              <a href="/detailUser/edit/<%= el.id %>">Edit</a>
+              <a href="/detailUser/delete/<%= el.id %>">Delete</a>
+              <a href="/"></a>
+          </td>
+        </tr>
+        <% }) %>
+      </table>      
+</body>
+</html>

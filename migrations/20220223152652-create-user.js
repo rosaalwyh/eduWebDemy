@@ -20,15 +20,6 @@ module.exports = {
       role: {
         type: Sequelize.STRING
       },
-      role: {
-        type: Sequelize.STRING
-      },
-      profilePicture: {
-        type: Sequelize.STRING
-      },
-      dateOfBirth: {
-        type: Sequelize.DATE
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
