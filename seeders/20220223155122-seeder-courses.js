@@ -9,7 +9,6 @@ module.exports = {
       course.updatedAt = new Date()
       course.CategoryId = course.categoryId
       delete course.categoryId
-      course.UserId = course.userId
       delete course.userId
     });
     return queryInterface.bulkInsert('Courses', courseData)
@@ -22,7 +21,6 @@ module.exports = {
       course.updatedAt = new Date()
       course.CategoryId = course.categoryId
       delete course.categoryId
-      course.UserId = course.userId
       delete course.userId
     });
     return queryInterface.bulkDelete('Courses', null)
