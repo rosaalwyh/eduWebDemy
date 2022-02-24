@@ -4,7 +4,6 @@ const {
 } = require('sequelize');
 
 const { encrypt } = require("../helpers/bcrypt");
-const { options } = require('../routes');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {

@@ -1,13 +1,14 @@
 const { User } = require('../models');
+const { compare } = require("../helpers/bcrypt");
 class LoginController {
 
     static formRegistration(req, res) {
         let { errMsg } = req.query
         if(!errMsg){
-            res.render('./auth/registration')
+            res.render('./auth/registration', { errMsg })
         } else {
             errMsg = errMsg.split(',')
-            res.render('./auth/registration', {errMsg})
+            res.render('./auth/registration', { errMsg })
         }
     }
 
@@ -25,7 +26,13 @@ class LoginController {
     }
 
     static formLogin(req, res) {
-        res.render('./auth/login')
+        let {errMsg} = req.query
+        if(!errMsg){
+            res.render('./auth/login', { errMsg })
+        } else {
+            errMsg = errMsg.split(',')
+            res.render('./auth/login', {errMsg})
+        }
     }
 
     static login(req, res) {
@@ -36,7 +43,7 @@ class LoginController {
                     const errMsg = 'Invalid username/password!'
                     res.redirect(`/login?errMsg=${errMsg}`)
                 } else {
-                    const isValidAuth = bcrypt.compareSync(password, user.password);
+                    const isValidAuth = compare(password, user.password);
                     if(isValidAuth){
                         res.redirect('/')
                     } else {
