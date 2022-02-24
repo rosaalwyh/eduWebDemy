@@ -1,7 +1,4 @@
 const {Course, Category, User, UserCourse} = require('../models');
- 
-const { Op } = require('sequelize'); 
-
 class CoursesController {
 
     static allStartup(req, res) {
@@ -84,17 +81,11 @@ class CoursesController {
         Category.findAll()
         .then((categories) => {
             category = categories
-            return UserCourse.findAll({
-                include : {
-                    model : User
-                }
-            })
+            return UserCourse.findAll({ include : { model : User } })
         })
         .then((user) => {
             users = user
-            return Course.findOne({
-                id : users.UserId
-            })
+            return Course.findOne({ id : users.UserId })
         })
         .then((course) => {
             res.render('./courses/editCourse', {course, users ,category, errMsg})

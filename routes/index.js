@@ -15,7 +15,7 @@ router.use((req, res, next) => {
         next()
     }
 })
-router.get('/', HomeContoller.home)
+router.get('/home', HomeContoller.home)
 router.use(coursesRoutes)
 router.use(userRoutes)
 router.use(categoryRoutes)
