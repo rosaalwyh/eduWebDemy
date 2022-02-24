@@ -23,7 +23,8 @@ class CoursesController {
         Course.filteredCourse(method)
             .then((courses) => {
                 if (req.session.user.role === "Student") {
-                    res.render('frontend/courses/index', { courses, courseName })
+                    let id = req.session.user.id
+                    res.render('frontend/courses/index', { courses, courseName, id })
                 } else {
                     res.render('courses/course', { courses, courseName })
                 }
