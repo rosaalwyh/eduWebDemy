@@ -6,7 +6,6 @@ class DetailUserController {
         if (id){
             DetailUser.findByPk(id)
             .then(dataDetail => {
-                console.log(id);
                 res.render('detailUsers/showDetailUser', {dataDetail, id})
             })
             .catch(err => {
@@ -25,7 +24,12 @@ class DetailUserController {
 
     static addDetailUser(req, res) {
         const msg = req.query.error
-        res.render('detailUsers/addFormDetailUser', {msg})
+        let {id} = req.params
+        if(req.session.user.role === "Student") {
+            res.render('./frontend/profile', {msg})
+        } else {
+            res.render('detailUsers/addFormDetailUser', {msg})
+        }
     }
 
     static createDetailUser(req, res) {
@@ -39,6 +43,7 @@ class DetailUserController {
             res.redirect(`/detailUser/add?error=${result}`)
         })
     }
+
     static editDetailUser(req, res) {
         const id = req.params.id
         const msg = req.query.error

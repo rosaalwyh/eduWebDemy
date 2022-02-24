@@ -1,43 +1,55 @@
-<%- include('../layouts/header') %>
-<div class="container mx-auto">
-    <div class="p-3">
-        <% if (Array.isArray(errMsg)) { %>
-            <% errMsg.forEach(errEl => { %>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="container mx-auto mt-4">
+        <div class="p-3">
+            <% if (Array.isArray(errMsg)) { %>
+                <% errMsg.forEach(errEl => { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%=errEl%>
+                    </div>
+                <% }) %>
+            <% } else if(!Array.isArray(errMsg) && errMsg !== undefined) { %>
                 <div class="alert alert-danger" role="alert">
-                    <%=errEl%>
+                    <%=errMsg%>
                 </div>
-            <% }) %>
-        <% } else if(!Array.isArray(errMsg) && errMsg !== undefined) { %>
-            <div class="alert alert-danger" role="alert">
-                <%=errMsg%>
-            </div>
-        <% } %>
-        <h1>Login</h1>
-        <form action="/login" method="post" class="mt-4">
-            <div class="row mb-3">
-                <div class="col-lg-6">
-                    <label for="username" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="username" name="username" placeholder="input your username">
+            <% } %>
+            <h1>Login</h1>
+            <form action="/login" method="post" class="mt-4">
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label for="username" class="col-sm-2 col-form-label">Username</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="input your username">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-lg-6">
-                    <label for="password" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                      <input type="password" class="form-control" id="password" name="password" placeholder="input your password">
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label for="password" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="input your password">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-primary mx-auto">Login</button>
-            <div class="row mt-3"> 
-                <div class="col-lg-6">
-                    <a href="/registration" class="btn btn-outline-success">Register!</a>
-                    <p>If you don't have an account</p>
+                <button type="submit" class="btn btn-primary mx-auto">Login</button>
+                <div class="row mt-3"> 
+                    <div class="col-lg-6">
+                        <a href="/registration" class="btn btn-outline-success">Register!</a>
+                        <p>If you don't have an account</p>
+                    </div>
                 </div>
-            </div>
-          </form>
+            </form>
+        </div>
     </div>
-</div>
-<%- include('../layouts/footer') %>
+</body>
+</html>
