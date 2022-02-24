@@ -1,20 +1,60 @@
 const {Course, Category, User} = require('../models');
+ 
+const { Op } = require('sequelize'); 
+
 class CoursesController {
 
     static getCourses(req, res) {
-        let { courseName } = req.query
-        Course.findAll({ 
-            include: [
-                { model: Category },
-                { model: User }
-            ]
-        })
-        .then((courses) => {
-            res.render('./courses/course', { courses, courseName })
-        })
-        .catch((err) => {
-            res.send(err)
-        })
+        let { courseName, sorted, search} = req.query
+        if (sorted){
+            Course.findAll({ 
+                include: [
+                    { model: Category },
+                    { model: User}
+                ],
+                order: [[
+                    sorted,'ASC'
+                ]]
+            })
+            .then((courses) => {
+                res.render('./courses/course', { courses, courseName })
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+        } else if (search){
+            let formatedKey = search.toLowerCase();
+            Course.findAll({
+                include: [
+                    { model: Category },
+                    { model: User}
+                ],
+                where: {
+                    name: {
+                        [Op.iLike]: `%${formatedKey}%`
+                    }
+                }
+            })
+            .then((courses) => {
+                res.render('./courses/course', { courses, courseName })
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+        } else {
+            Course.findAll({ 
+                include: [
+                    { model: Category },
+                    { model: User}
+                ]
+            })
+            .then((courses) => {
+                res.render('./courses/course', { courses, courseName })
+            })
+            .catch((err) => {
+                res.send(err)
+            })
+        }
     }
 
     static addCourses(req, res) {
