@@ -1,22 +1,32 @@
 const {Course, Category, User, UserCourse} = require('../models');
- 
-const { Op } = require('sequelize'); 
+  
+const nodemailer = require('nodemailer') 
 
 class CoursesController {
-
-    static allStartup(req, res) {
-        let role = req.query.sortBy
-        Startups.getStartUpByValuation(role)
-        .then((data) => {
-            res.render('allStartup', {data, formatCurrency})
-        })
-        .catch((error) => {
-            res.send(error)
-        })
-    }
-
+    
     static getCourses(req, res) {
-        let { courseName, sorted, search} = req.query
+        let { courseName, sorted, search, duration} = req.query
+        let {id, email} = req.session.user
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "abyoso09@gmail.com",
+                pass: "ANUBARAK"
+            }
+        })
+        let mailOptions = {
+            from: "abyoso09@gmail.com", 
+            to: email,
+            subject: "Welcome to Our Classs",
+            text: `Welcome, Please join us in ${courseName}, 
+            class duration will run for ${duration} and will be held in, so dont be late`
+        }
+        if (duration){
+            transporter.sendMail(mailOptions, function(err, success){
+                if (err) console.log(err);
+                else console.log('email sent');
+            })
+        }
         let method;
         if (sorted){
             method = sorted
@@ -25,7 +35,7 @@ class CoursesController {
         }
         Course.filteredCourse(method)
             .then((courses) => {
-                res.render('courses/course', {courses, courseName})
+                res.render('courses/course', {courses, courseName, id})
             })
             .catch((error) => {
                 res.send(error)
@@ -66,11 +76,9 @@ class CoursesController {
             return UserCourse.create(data)
         })
         .then(() => {
-            console.log(data);
             res.redirect('/courses')
         })
         .catch((err) => {
-            console.log(err);
             let errMsg = err.errors.map((errEl) => errEl.message)
             res.redirect(`/courses/add?errMsg=${errMsg}`)
         })
@@ -114,7 +122,6 @@ class CoursesController {
             res.redirect('/courses')
         })
         .catch((err) => {
-            console.log(err);
             let errMsg = err.errors.map((errEl) => errEl.message)
             res.redirect(`/courses/edit/${id}?errMsg=${errMsg}`)
         })
