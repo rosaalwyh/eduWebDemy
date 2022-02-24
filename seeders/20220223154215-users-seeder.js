@@ -5,6 +5,8 @@ module.exports = {
   up (queryInterface, Sequelize) {
     userData.forEach(user => {
       delete user.id
+      delete user.profilePicture
+      delete user.dateOfBirth
       user.createdAt = new Date()
       user.updatedAt = new Date()
     });

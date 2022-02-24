@@ -1,11 +1,12 @@
 const userRouter = require('express').Router();
 const UserController = require('../controllers/userController');
+const { isAdmin } = require('../middleware');
 
-userRouter.get('/user', UserController.getUser)
-userRouter.get('/user/add', UserController.addUser)
-userRouter.post('/user/add', UserController.createUser)
-userRouter.get('/user/edit/:id', UserController.editUser)
-userRouter.post('/user/edit/:id', UserController.updateUser)
-userRouter.get('/user/delete/:id', UserController.deleteUser)
+userRouter.get('/user', isAdmin, UserController.getUser)
+userRouter.get('/user/add', isAdmin, UserController.addUser)
+userRouter.post('/user/add', isAdmin, UserController.createUser)
+userRouter.get('/user/edit/:id', isAdmin, UserController.editUser)
+userRouter.post('/user/edit/:id', isAdmin, UserController.updateUser)
+userRouter.get('/user/delete/:id', isAdmin, UserController.deleteUser)
 
 module.exports = userRouter

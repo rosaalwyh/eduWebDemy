@@ -1,20 +1,20 @@
-// npx sequelize-cli model:generate --name Category --attributes name:string
-// npx sequelize-cli model:generate --name User --attributes username:string,password:string,email:string,role:string,role:string,profilePicture:string,dateOfBirth:date
-// npx sequelize-cli model:generate --name Courses --attributes name:string,description:text,duration:integer,CategoryId:integer,UserId:integer
-// npx sequelize-cli seed:generate --name userCourses-seeder
-
-// npx sequelize-cli model:generate --name DetailUser --attributes fullName:string,dateOfBirth:date,profilePicture:string,address:string,phoneNumber:string,UserId:integer
-
-// npx sequelize-cli model:generate --name UserCourse --attributes CourseId:integer,UserId:integer
-
 const express = require('express')
+const router = require('./routes');
+const session = require('express-session')
 const app = express()
 const port = 3000
 
-const router = require('./routes');
-
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'gabolehtau',//harus ada
+  resave: false,
+  saveUninitialized: false,
+  cookie: { 
+    secure: false,
+    sameSite: true //utk security csrf attack
+  }
+}))
 
 app.use(router);
 

@@ -7,6 +7,7 @@ const { encrypt } = require("../helpers/bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
+      User.hasOne(models.DetailUser, { foreignKey: "UserId" })
       User.belongsToMany(models.Course, {  
         through: models.UserCourse
       })
@@ -37,21 +38,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate : {
         notEmpty: {
-          args: true,
-          msg: 'Please Enter Password'
-        },
-        notNull: {
-          args: true,
-          msg: 'Please Enter Password'
-        },
-        len: {
-          args: [6,200],
-          msg : 'Password length minimum 6'
-        },
-        isAlphanumeric: {
           args : true,
-          msg : 'Must include letters, numbers and symbol'
-        }    
+          msg : 'Please Enter Password'
+        },
+        notNull:{
+          args: true,
+          msg: 'Please Enter Password'
+        }
       }
     },
     email: {
@@ -81,39 +74,14 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Please Enter Role'
         }
       }
-    },
-    profilePicture:{
-      type : DataTypes.STRING,
-      allowNull: false,
-      validate : {
-        notEmpty:{
-          args: true,
-          msg: 'Please Enter Image'
-        },
-        notNull:{
-          args: true,
-          msg: 'Please Enter Image'
-        }
-      }
-    }, 
-    dateOfBirth:{
-      type : DataTypes.DATE,
-      allowNull: false,
-      validate : {
-        notEmpty:{
-          args: true,
-          msg: 'Please Enter Date of Birth'
-        },
-        notNull:{
-          args: true,
-          msg: 'Please Enter Date of Birth'
-        }
-      }
-    } 
+    }
   }, {
     hooks: {
-      afterValidate: (instance, option) => {
+      afterValidate: (instance, options) => {
         instance.password = encrypt(instance.password)
+      },
+      beforeValidate: (instance, options) => {
+        instance.role = "Student"
       }
     },
     sequelize,
