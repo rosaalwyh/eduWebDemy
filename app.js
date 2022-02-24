@@ -3,6 +3,8 @@
 // npx sequelize-cli model:generate --name Courses --attributes name:string,description:text,duration:integer,CategoryId:integer,UserId:integer
 // npx sequelize-cli model:generate --name Category --attributes name:string
 // npx sequelize-cli seed:generate --name users-seeder
+
+// npx sequelize-cli model:generate --name DetailUser --attributes fullName:string,dateOfBirth:date,profilePicture:string,address:string,phoneNumber:string,UserId:integer
 const express = require('express')
 const app = express()
 const port = 3000
