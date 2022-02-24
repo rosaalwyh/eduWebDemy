@@ -11,7 +11,7 @@
      <p style="color: red;"><%= msg %></p>
     <% } %>
 
-    <form action="/category/edit/<%= categoryEdit.id %>" method="post">
+    <form action="/category/edit/<%= categoryEdit.name %>" method="post">
         <label for="name">Enter Category Name:</label><br>
         <input type="text" id="name" name="name" value="<%= categoryEdit.name%>"><br>
         <input type="submit" value="Submit">
