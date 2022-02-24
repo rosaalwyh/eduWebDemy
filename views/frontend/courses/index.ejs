@@ -1,0 +1,21 @@
+<%- include('../layouts/header') %>
+<div class="container">
+    <div class="p-3">
+        <% courses.forEach(course => { %>
+            <div class="row m-3">
+                <div class="col-md-3">
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body">
+                        <h5 class="card-title"><%=course.name%></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><%=course.duration%>Menit</h6>
+                        <p class="card-text"><%=course.description.substring(0,50)%>...<span style="color: red;">(Klik read more to see the detail)</span> </p>
+                        <a href="#" class="btn btn-outline-primary">Join Course</a>
+                        <a href="/courses/student/detail/<%=course.id%>" class="btn btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+<%- include('../layouts/footer')%>

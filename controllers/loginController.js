@@ -49,7 +49,11 @@ class LoginController {
                     req.session.user =  {id: user.id, role:user.role, email:user.email} //set session di controller login
                     const isValidAuth = compare(password, user.password);
                     if(isValidAuth){
-                        return res.redirect('/')
+                        if(req.session.user.role === "Student"){
+                            return res.redirect('/courses/student')
+                        } else {
+                            return res.redirect('/home')
+                        }
                     } else {
                         const errMsg = 'Invalid username/password!'
                         return res.redirect(`/login?errMsg=${errMsg}`)
