@@ -4,12 +4,12 @@ const {
 } = require('sequelize');
 
 const { encrypt } = require("../helpers/bcrypt");
-
-
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      User.hasMany(models.Course, {  foreignKey: "UserId"})
+      User.belongsToMany(models.Course, {  
+        through: models.UserCourse
+      })
     }
     get age(){
       let currentYear = new Date();
