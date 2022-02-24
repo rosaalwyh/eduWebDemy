@@ -29,6 +29,8 @@ class LoginController {
         let {errMsg} = req.query
         if(!errMsg){
             res.render('./auth/login', { errMsg })
+        } else if (!Array.isArray(errMsg)) {
+            res.render('./auth/login', { errMsg })
         } else {
             errMsg = errMsg.split(',')
             res.render('./auth/login', {errMsg})
@@ -41,17 +43,32 @@ class LoginController {
             .then((user) => {
                 if(!user){
                     const errMsg = 'Invalid username/password!'
-                    res.redirect(`/login?errMsg=${errMsg}`)
+                    return res.redirect(`/login?errMsg=${errMsg}`)
                 } else {
+                    //case berhasil
+                    req.session.user =  {id: user.id, role:user.role} //set session di controller login
                     const isValidAuth = compare(password, user.password);
                     if(isValidAuth){
-                        res.redirect('/')
+                        return res.redirect('/')
                     } else {
                         const errMsg = 'Invalid username/password!'
-                        res.redirect(`/login?errMsg=${errMsg}`)
+                        return res.redirect(`/login?errMsg=${errMsg}`)
                     }
                 }
             })
+            .catch((err) => {
+                res.send(err)
+            })
+    }
+
+    static logout(req, res){
+        req.session.destroy((err) => {
+            if(err){
+                res.send(err)
+            } else {
+                res.redirect('/login')
+            }
+        })
     }
 
 }
