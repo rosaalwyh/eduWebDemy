@@ -1,60 +1,35 @@
-const {Course, Category, User} = require('../models');
+const {Course, Category, User, UserCourse} = require('../models');
  
 const { Op } = require('sequelize'); 
 
 class CoursesController {
 
+    static allStartup(req, res) {
+        let role = req.query.sortBy
+        Startups.getStartUpByValuation(role)
+        .then((data) => {
+            res.render('allStartup', {data, formatCurrency})
+        })
+        .catch((error) => {
+            res.send(error)
+        })
+    }
+
     static getCourses(req, res) {
         let { courseName, sorted, search} = req.query
+        let method;
         if (sorted){
-            Course.findAll({ 
-                include: [
-                    { model: Category },
-                    { model: User}
-                ],
-                order: [[
-                    sorted,'ASC'
-                ]]
-            })
-            .then((courses) => {
-                res.render('./courses/course', { courses, courseName })
-            })
-            .catch((err) => {
-                res.send(err)
-            })
-        } else if (search){
-            let formatedKey = search.toLowerCase();
-            Course.findAll({
-                include: [
-                    { model: Category },
-                    { model: User}
-                ],
-                where: {
-                    name: {
-                        [Op.iLike]: `%${formatedKey}%`
-                    }
-                }
-            })
-            .then((courses) => {
-                res.render('./courses/course', { courses, courseName })
-            })
-            .catch((err) => {
-                res.send(err)
-            })
+            method = sorted
         } else {
-            Course.findAll({ 
-                include: [
-                    { model: Category },
-                    { model: User}
-                ]
-            })
-            .then((courses) => {
-                res.render('./courses/course', { courses, courseName })
-            })
-            .catch((err) => {
-                res.send(err)
-            })
+            method = search
         }
+        Course.filteredCourse(method)
+            .then((courses) => {
+                res.render('courses/course', {courses, courseName})
+            })
+            .catch((error) => {
+                res.send(error)
+            })
     }
 
     static addCourses(req, res) {
@@ -81,11 +56,21 @@ class CoursesController {
     static createCourses(req, res) {
         let {name, description, duration, CategoryId, UserId} = req.body
         let newUser = {name, description, duration, CategoryId, UserId}
+        let data;
         Course.create(newUser)
         .then((course) => {
+            data = {
+                CourseId : course.id,
+                UserId
+            }
+            return UserCourse.create(data)
+        })
+        .then(() => {
+            console.log(data);
             res.redirect('/courses')
         })
         .catch((err) => {
+            console.log(err);
             let errMsg = err.errors.map((errEl) => errEl.message)
             res.redirect(`/courses/add?errMsg=${errMsg}`)
         })
@@ -99,11 +84,17 @@ class CoursesController {
         Category.findAll()
         .then((categories) => {
             category = categories
-            return User.findAll()
+            return UserCourse.findAll({
+                include : {
+                    model : User
+                }
+            })
         })
         .then((user) => {
             users = user
-            return Course.findByPk(id)
+            return Course.findOne({
+                id : users.UserId
+            })
         })
         .then((course) => {
             res.render('./courses/editCourse', {course, users ,category, errMsg})
@@ -117,11 +108,13 @@ class CoursesController {
         let {id} = req.params
         let { name, description, duration, CategoryId, UserId } = req.body
         let editedCourse = { name, description, duration, CategoryId, UserId }
+        let data;
         Course.update((editedCourse), {where: {id}})
         .then((course) => {
             res.redirect('/courses')
         })
         .catch((err) => {
+            console.log(err);
             let errMsg = err.errors.map((errEl) => errEl.message)
             res.redirect(`/courses/edit/${id}?errMsg=${errMsg}`)
         })
